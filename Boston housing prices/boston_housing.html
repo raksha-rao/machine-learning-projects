@@ -13269,7 +13269,7 @@ Think about the pros and cons of adding more training points based on if the tra
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Answer: </strong> Max Depth = 3 seems to have a better training score and a test score. With more data points, training score seems to reduce a small factor, and testing score seems to increase a large factor and both the scores are almost converging. This is the ideal situation to be in. Where the training and test score is both higher and almost closer together. Error is the least in both the cases compared to other graphs.</p>
+<p><strong>Answer: </strong> Max Depth = 3 seems to have a better training score and a test score. With more data points, training score seems to reduce a small factor, and testing score seems to increase a large factor and both the scores are almost converging. Additional data points doesn't seem to affect much of the training and test score after depth =3. Where the training and test score is both higher and almost closer together. Error is the least in both the cases compared to other graphs.</p>
 
 </div>
 </div>
@@ -14002,7 +14002,7 @@ For the <code>fit_model</code> function in the code cell below, you will need to
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong> Hint: </strong> The answer comes from the output of the code snipped above.</p>
-<p><strong>Answer: </strong>'max_depth' is 3 for the optimal model.</p>
+<p><strong>Answer: </strong>'max_depth' is 3 for the optimal model. This inference is quite similar to the inference we derived from the model complexity graph.</p>
 
 </div>
 </div>
@@ -14099,7 +14099,8 @@ Predicted selling price for Client 3&#39;s home: $900,415.38
 Predicted selling price for Client 1's home: $359,234.04
 Predicted selling price for Client 2's home: $263,808.20
 Predicted selling price for Client 3's home: $900,415.38</p>
-<p>As per the results, client 3's home has the highest value and client 2's home has the lowest value which corelates well with the features of the homes. Since client 3 has the biggest house with the best public school neighborhood and the lowest poverty level and client 2 has the smallest house with a relatively high poverty rate and not the best public schools. Hence, client 3 lives in a high income neighborhood which exponentially increases the prices where as client 3 lives a relatively low income neighborhood. Client 1's home featues is slightly better than client 2, so the price of the house is also a bit better. However, home prices keep varying and what holds good now may not hold good 2 years from now. Also, there is no sufficient features to predict the housing prices. Some additional features - parking space, floor, swimming pool, utilities, etc can also play a significant role in the house prices</p>
+<p>As per the results, client 3's home has the highest value and client 2's home has the lowest value which corelates well with the features of the homes. Since client 3 has the biggest house with the best public school neighborhood and the lowest poverty level and client 2 has the smallest house with a relatively high poverty rate and not the best public schools. Hence, client 3 lives in a high income neighborhood which exponentially increases the prices where as client 3 lives a relatively low income neighborhood. Client 1's home featues is slightly better than client 2, so the price of the house is also a bit better. This model helps in relatively comparing the prices of the houses.</p>
+<p>However, home prices keep varying and what holds good now may not hold good 2 years from now. Also, there is no sufficient features to predict the housing prices. Some additional features - parking space, floor, swimming pool, utilities, etc can also play a significant role in the house prices. Hence it is not sufficient to predict housing prices.</p>
 
 </div>
 </div>
@@ -14185,6 +14186,7 @@ Data collected in 1978 can be obsolete while predicting housing prices today. Si
 <p>No, the model is not robust enough because it doesn't have enough features to accuractely predict the housing prices.
 Additional features would be required - rate per square foot of the house, swimming pool, floor, utilities, etc. The prices vary from town to city to country. So, if the data is collected in a particular city, it is mostly applicable in that city and the cities which has similar features like it.</p>
 <p>It is not fair to judge the price of an individual home based on the characteristics of the entire neighboorhood. Although, it plays an important factor in the housing prices, other factors like number of rooms, rate per square foot of the house, also plays a role.</p>
+<p>Therefore, this model is not extensive enough to fit in a real world setting.</p>
 
 </div>
 </div>

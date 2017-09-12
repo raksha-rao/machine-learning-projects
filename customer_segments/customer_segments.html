@@ -12807,10 +12807,8 @@ div#notebook {
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># TODO: Make a copy of the DataFrame, using the &#39;drop&#39; function to drop the given feature</span>
 <span class="kn">from</span> <span class="nn">sklearn.cross_validation</span> <span class="kn">import</span> <span class="n">train_test_split</span>
-<span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="kn">import</span> <span class="n">DecisionTreeClassifier</span>
+<span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="kn">import</span> <span class="n">DecisionTreeRegressor</span>
 <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">r2_score</span>
-<span class="kn">import</span> <span class="nn">visuals</span> <span class="kn">as</span> <span class="nn">vs</span>
-<span class="o">%</span><span class="k">matplotlib</span> inline
 
 <span class="n">display</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
 
@@ -12826,7 +12824,7 @@ div#notebook {
 
 
 <span class="c1"># TODO: Create a decision tree regressor and fit it to the training set</span>
-<span class="n">regressor</span> <span class="o">=</span> <span class="n">DecisionTreeClassifier</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">regressor</span> <span class="o">=</span> <span class="n">DecisionTreeRegressor</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">regressor</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span><span class="n">y_train</span><span class="p">)</span>
 <span class="n">y_pred</span> <span class="o">=</span> <span class="n">regressor</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
 
@@ -12908,7 +12906,7 @@ div#notebook {
 <div class="prompt"></div>
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Accuracy score: -1.35170287269
+<pre>Accuracy score: -11.0236279005
 </pre>
 </div>
 </div>
@@ -12940,7 +12938,7 @@ div#notebook {
 <p><strong>Answer:</strong></p>
 <ul>
 <li>I was attempting to predict Delicatessen feature.</li>
-<li>The R2 score turned out to be -1.35 which implied the model fails to fit the data. This feature point is thus hard to predict using other features.</li>
+<li>The R2 score turned out to be -11.02 which implied the model fails to fit the data. This feature point is thus hard to predict using other features.</li>
 <li>So, it need to be considered to make predictions of customer's spending habits for relevance.</li>
 </ul>
 
@@ -20586,12 +20584,13 @@ AACgWP8PSVXvCn5nfSsAAAAASUVORK5CYII=
 <ul>
 <li>0.7068 of variance in data is explained in total by the first and second principal component.</li>
 <li>0.9311 of variance in data is explained in total by the first 4 principal components.</li>
-<li>Dimension 1 and dimension 2 represent positive increase in dimensions since it majorly deals with decrease in positive weighted features and increase in negative weighted features. In dimension 1, the feature fresh and frozen positively correlates to the positive increase in dimension where as the rest of the features correspond to the negative decrease in dimension. Detergent paper, milk and grocery are well represented in D1.</li>
-<li>However, in dimension 2, all the features correspond to the negative decrease in dimension. Fresh food, delicatessn and frozen are well represented in D2. </li>
-<li>In dimension 3, delicatessn and frozen correspond to the positive increase in the dimension and rest with the negative increase in the dimension. Fresh food, delicatessn and frozen are well represented in D3. </li>
-<li>Dimension 4 mainly deals with frozen and detergent paper feature corresponding to the positive increase in dimension. Frozen and delicatessn are well represented in D4.</li>
+<li>Dimension 1 has majorly a negative corelation with milk, grocery and detergent paper since it is represented with higher weights. In dimension 1, the feature fresh and frozen positively correlates to a minor extent to the  dimension where as the rest of the features correspond to the negative decrease in dimension. So, it implies the customer mainly focuses fresh and negatively correlates to frozen and milk, grocery and detergent paper. This could be a restaurant.</li>
+<li>However, in dimension 2, all the features correspond to the negative decrease in dimension. Fresh food, delicatessn and frozen majorly contribute negatively to dimension 2. Since fresh food, delicatesssn and frozen has a negative effect on the dimension, this dimension could probably correspond to a retailer.</li>
+<li>In dimension 3, delicatessn and frozen correspond to a positive correlation in the dimension and rest with decrease in dimension. detergent_paper to a negative correlation with the dimension.  This could be a restaurant. Same logic as dimension 1 applies.</li>
+<li>Dimension 4 mainly deals with frozen feature majorly corresponding to the positive correlation in dimension. delicatessn to a negative correlation in the dimension. Could be a restaurant. Same logic as dimension 1 applies.</li>
 </ul>
-<p>In conclusion, decrease spending in milk, fresh food and delicatessn and increased spending in frozen foods directly increases and has significant impact on customer spending.</p>
+<p>In dimension 1 and dimension 2, it can be observed that milk, grocery and detergent paper work together and fresh and frozen work together in most of the cases. And, delicatessn has a negative correlation in dimension 1 and 2.</p>
+<p>However in dimension 3 and 4, frozen items contribute positively and fresh items contribute negatively to the dimensions. And, delicatessn seems to add positively to frozen and negatively to frozen in dimension 3 and 4 respectively. It is a bit fuzzy in dimension 3 and 4, and it is tough to make assumptions based on this.</p>
 
 </div>
 </div>
@@ -20848,7 +20847,7 @@ AACgWP8PSVXvCn5nfSsAAAAASUVORK5CYII=
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;matplotlib.axes._subplots.AxesSubplot at 0x11d0ee5d0&gt;</pre>
+<pre>&lt;matplotlib.axes._subplots.AxesSubplot at 0x11ad15610&gt;</pre>
 </div>
 
 </div>
@@ -22021,27 +22020,27 @@ AAAAADARijQAAAAAMJH/AgNWn2kmN6DyAAAAAElFTkSuQmCC
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># TODO: Apply your clustering algorithm of choice to the reduced data </span>
 <span class="kn">from</span> <span class="nn">sklearn.cluster</span> <span class="kn">import</span> <span class="n">KMeans</span>
 <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">silhouette_score</span>
-<span class="n">clusterer</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-<span class="n">clusterer</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">reduced_data</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]:</span>
+    <span class="n">clusterer</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">clusterer</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">reduced_data</span><span class="p">)</span>
 <span class="c1"># TODO: Predict the cluster for each data point</span>
-<span class="n">preds</span> <span class="o">=</span> <span class="n">clusterer</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">reduced_data</span><span class="p">)</span>
+    <span class="n">preds</span> <span class="o">=</span> <span class="n">clusterer</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">reduced_data</span><span class="p">)</span>
 
 <span class="c1"># TODO: Find the cluster centers</span>
-<span class="n">centers</span> <span class="o">=</span> <span class="n">clusterer</span><span class="o">.</span><span class="n">cluster_centers_</span>
+    <span class="n">centers</span> <span class="o">=</span> <span class="n">clusterer</span><span class="o">.</span><span class="n">cluster_centers_</span>
 
 <span class="c1"># TODO: Predict the cluster for each transformed sample data point</span>
-<span class="n">sample_preds</span> <span class="o">=</span> <span class="n">clusterer</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">pca_samples</span><span class="p">)</span>
+    <span class="n">sample_preds</span> <span class="o">=</span> <span class="n">clusterer</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">pca_samples</span><span class="p">)</span>
 
 <span class="c1"># TODO: Calculate the mean silhouette coefficient for the number of clusters chosen</span>
-<span class="n">score</span> <span class="o">=</span> <span class="n">silhouette_score</span><span class="p">(</span><span class="n">reduced_data</span><span class="p">,</span><span class="n">preds</span><span class="p">)</span>
-
-<span class="k">print</span> <span class="n">score</span>
+    <span class="n">score</span> <span class="o">=</span> <span class="n">silhouette_score</span><span class="p">(</span><span class="n">reduced_data</span><span class="p">,</span><span class="n">preds</span><span class="p">)</span>
+    <span class="k">print</span> <span class="s1">&#39;Cluster </span><span class="si">%d</span><span class="s1">: </span><span class="si">%f</span><span class="s1">&#39;</span><span class="o">%</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">score</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -22056,7 +22055,11 @@ AAAAADARijQAAAAAMJH/AgNWn2kmN6DyAAAAAElFTkSuQmCC
 <div class="prompt"></div>
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>0.426281015469
+<pre>Cluster 2: 0.426281
+Cluster 3: 0.390301
+Cluster 4: 0.332930
+Cluster 5: 0.352209
+Cluster 6: 0.364588
 </pre>
 </div>
 </div>
@@ -22083,10 +22086,13 @@ AAAAADARijQAAAAAMJH/AgNWn2kmN6DyAAAAAElFTkSuQmCC
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Answer:</strong> Silhouette score - 0.426</p>
-<ul>
-<li>It seems that when no of clusters =2, the silhouette score is the best.</li>
-</ul>
+<p><strong>Answer:</strong></p>
+<p>Cluster 2: 0.426281</p>
+<p>Cluster 3: 0.390301</p>
+<p>Cluster 4: 0.332930</p>
+<p>Cluster 5: 0.352209</p>
+<p>Cluster 6: 0.364588</p>
+<p>From the above results, it seems that when no of clusters = 2, the silhouette score is the best.</p>
 
 </div>
 </div>
@@ -23527,7 +23533,8 @@ yLH+H8/FoMBKeBEBAAAAAElFTkSuQmCC
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Answer:</strong> The segments can fairly inferred by the feature set it corresponds to. Delicatessn doesn't seem to play much of a role in determining the segments since the mean of both the segments for delicatessn is 7.0. However, higher Fresh items, frozen items and lower milk, grocery and detergents paper correspond to segment 0. And the rest to segment 2. Also, the previous inference of grocery having a direct correlation with detergents_paper still holds good. Since, both of them are either increasing or decreasing with the segments.</p>
+<p><strong>Answer:</strong> The segments can fairly inferred by the feature set it corresponds to. Delicatessn doesn't seem to play much of a role in determining the segments since the mean of both the segments for delicatessn is 7.0. However, higher Fresh items, frozen items and lower milk, grocery and detergents paper correspond to segment 0. And the opposite applies to segment 2. Also, the previous inference of grocery having a direct correlation with detergents_paper still holds good. Since, both of them are either increasing or decreasing with the segments.
+From the diagram drawn previously, we know that Dimension 1 represents fresh and frozen positively and grocery, milk and detergent paper negatively. Higher the weights for fresh and frozen, higher the values in the dimension. This corresponds to segment 0. The opposite holds true for segment 1.</p>
 
 </div>
 </div>
@@ -23712,7 +23719,8 @@ Sample point 2 predicted to be in Cluster 0
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer:</strong></p>
 <ul>
-<li>Sample point 0 is best predicted by cluster 0. Sample 1 by cluster 1. And sample 2 by cluster 2. Even if all the points doesn't corelate completely with the mean points, if the majority of the features are best represented by a cluster, then we can predict that the sample point belongs to the cluster.</li>
+<li>Sample point 0 is best predicted by cluster 0. Sample 1 by cluster 1. And sample 2 by cluster 2. Even if all the points doesn't corelate completely with the mean points, if the majority of the features are best represented by a cluster, then we can predict that the sample point belongs to the cluster.
+Sample point 0 and 1 like mentioned in question 1 corresponds to the same cluster(restaurant). And, sample point 1 corresponds to a different cluster. This cluster could actually a retail which was earlier misinterpreted as deli.</li>
 </ul>
 
 </div>
@@ -23756,7 +23764,7 @@ Sample point 2 predicted to be in Cluster 0
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Answer:</strong> Based on the spending habits, we can get a good idea of the demand of different products among customers. The change in delivery service to reduce the number of days will cause more issues to the customer segments where the demand for those products is more. Segment 0 has more demand for fresh and frozen items and less demand for milk, grocery and detergent paper. Hence, segment 0 might probably not mind if their delivery service reduces for milk or grocery or detergent paper. And, vice versa.</p>
+<p><strong>Answer:</strong> Segment 0 has more demand for fresh and frozen items and less demand for milk, grocery and detergent paper. And vice versa, In this case A/B testing can be applied on the customers by dividing them into 2 segments - segment 0 and segment 1. Depending on which results are better, as which segments get better feedback on the change in the delivery service days, that segment can have the delivery service changed to 3 days a week. Since the 2 segments differ in the spending on the products, it makes sense to divide them into these segments to see which of them work better.</p>
 
 </div>
 </div>
@@ -23780,7 +23788,7 @@ Sample point 2 predicted to be in Cluster 0
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Answer:</strong> A wholesale distributor can label new customers using their estimated product spendig and customer segment data. Now that we have enough information as to what constitutes each segment, we can divide the new data to the respective segments using supervised learning. Target variable could be probably something like restaurant or not, etc.</p>
+<p><strong>Answer:</strong> A wholesale distributor can label new customers using their estimated product spending and customer segment data. This can be done by an unsupervised learner as above. Alternatively, we can engineered feature as a predictor to predict the respective segments using supervised learning. Target variable could be probably something like restaurant and Retail segments since these are the segments we found from clustering.</p>
 
 </div>
 </div>
@@ -24533,10 +24541,10 @@ ERERkWUx4CEiIiIiIstiwENERERERJbFgIeIiIiIiCzr/wPINATG8jD7IgAAAABJRU5ErkJggg==
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Answer:</strong> It correlates pretty well with the classification except in some cases among outliers. The previous example showed 2 clusters which seems to be aligning pretty well with this instance.</p>
+<p><strong>Answer:</strong> It correlates pretty well with the classification except in some cases among outliers. The previous example showed 2 clusters which seems to be aligning pretty well.</p>
 <ul>
-<li>By this graph distribution, yes there are customer segments which can be purely described as retailers or restaurants. Although, there is no clear cut division amongst the categories, it can be fairly assumed to a certain extent.</li>
-<li>Yes, in the previous case it was identified that the classification could mean that if it is a restaurant or not. This closely resembles the classification we have made in here.</li>
+<li>By this graph distribution, it is tough to clearly make out a decision boundary that can divide it into retailers or restaurants. </li>
+<li>There is more cluttering now than before the channel and region feature were added. There was more or less a clear decision boundary before which is not so clear now. And each of the segments also have points in it's boundary belonging to the other segment.</li>
 </ul>
 
 </div>

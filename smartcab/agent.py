@@ -138,18 +138,9 @@ class LearningAgent(Agent):
                 action = random.choice(self.valid_actions)
             
             else:
-                q = [self.Q[state][a] for a in self.valid_actions]
-                count = q.count(maxQ)
-                if count > 1:
-                    best = [i for i in range(len(self.valid_actions)) if q[i] == maxQ]
-                    i = random.choice(best)
-                else:
-                    i = q.index(maxQ)
- 
-                action = self.valid_actions[i]
-                #    for action,qvalue in action_dict.iteritems():
-                #       if qvalue == highest_qvalue:
-                #            return action      
+                maxQ = self.get_maxQ(state)
+                best_actions = [action for action in self.valid_actions if self.Q[state][action] == maxQ]
+                action = random.choice(best_actions)
         return action
 
             

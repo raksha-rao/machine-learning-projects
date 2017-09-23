@@ -11890,9 +11890,9 @@ div#notebook {
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer:</strong></p>
 <ul>
-<li>Yes, the smartcab is moving during the simulation.</li>
+<li>No, the smartcab is not moving during simulation. This is why rewards are given during red light and penalties at green.</li>
 <li>The agent is receiving positive and negative rewards during the simulation.</li>
-<li>Looks like green light is awarded negative rewards and red light positive rewards.</li>
+<li>Looks like green light is given penalties and rewarded on red light.</li>
 </ul>
 
 </div>
@@ -13085,7 +13085,7 @@ SUVORK5CYII=
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer:</strong></p>
 <ul>
-<li>For each 2 trials, the agent is making 8-10 bad decisions which is to say it is making a lot of bad decisions. It is causing minor and major violations as well as fewer number of minor and major accidents. Hence the safety rating is F.</li>
+<li>The driving agent is making bad decisions around 43% of the time. Total accidents = major + minor accidents. So, total number of bad decisions that causes accidents = ( 0.05 + 0.05 )/0.43 = 23%</li>
 <li>Even when the agent is driving randomnly, the reliabiliy is around 20 - 30%. which means it can still reach the destination 20-30% of the time which is reasonable.</li>
 <li>Yes, Looks like for each action, it has been penalized to a certain extent. On an average the agent is receiving negative rewards and getting penalized.</li>
 <li>As the number of trials increases, the outcome of results doesn't seem to change significantly. The reliability increases by a small factor. However, this is due to random actions.</li>
@@ -17102,7 +17102,7 @@ zMzaxAGWmZmZmZlZm/w/wdOw0/s3YHkAAAAASUVORK5CYII=
 </ul>
 </li>
 <li>If the waypoint is right<ul>
-<li>if there is forward moving traffic on the left, wait</li>
+<li>if there is red light and forward moving traffic on the left, wait</li>
 <li>else move right.</li>
 </ul>
 </li>
